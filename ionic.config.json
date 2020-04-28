@@ -1,0 +1,7 @@
+{
+  "name": "housekeepingMerchant/",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
