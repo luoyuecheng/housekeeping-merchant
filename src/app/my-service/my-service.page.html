@@ -1,0 +1,93 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-item class="header">
+      <!-- <ion-icon name="chevron-back-outline" (click)="handleBack()"></ion-icon> -->
+      <ion-title>我发布的服务</ion-title>
+    </ion-item>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="release">
+  <ion-list>
+    <ion-card>
+      <ion-item>
+        <ion-icon name="person-circle-outline"></ion-icon>
+        <ion-label>姓名</ion-label>
+        <ion-text>等待接单</ion-text>
+      </ion-item>
+      <ion-item>
+        <ion-label>
+          <ion-text>门窗锁</ion-text>
+          <p>开换锁</p>
+        </ion-label>
+        <ion-text>直约抢单</ion-text>
+      </ion-item>
+      <ion-text class="message">
+        <ion-icon name="time-outline"></ion-icon>
+        <ion-text>2020-04-28 00:00</ion-text>
+      </ion-text>
+      <ion-text class="message">
+        <ion-icon name="location-outline"></ion-icon>
+        <ion-text>林芝地区巴宜区巴宜区林芝市</ion-text>
+      </ion-text>
+      <ion-text class="message amount">
+        <ion-text class="bd1">直约预付金</ion-text>
+        <ion-label>已付金额: <ion-text>{{ 30 }}</ion-text>元</ion-label>
+      </ion-text>
+      <ion-item>
+        <ion-button class="refuse" slot="end" (click)="handleOrder('refuse')">拒单</ion-button>
+        <ion-button class="receive" slot="end" (click)="handleOrder('receive')">立即接单</ion-button>
+      </ion-item>
+    </ion-card>
+
+    <ion-card>
+      <ion-item>
+        <ion-label>{{ 'title 服务标题' }}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>服务类型</ion-label>
+        <ion-text>{{ '地址 广州' }}</ion-text>
+      </ion-item>
+      <ion-item>
+        <ion-label>位置</ion-label>
+        <ion-text>{{ '地址 广州' }}</ion-text>
+      </ion-item>
+      <ion-item>
+        <ion-label>价格</ion-label>
+        <ion-text>{{ '30' }}</ion-text>
+      </ion-item>
+    </ion-card>
+  </ion-list>
+</ion-content>
+
+<ion-content>
+  <ion-item>
+    <ion-label>服务标题</ion-label>
+    <ion-input placeholder="请输入服务标题"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>服务类型</ion-label>
+    <ion-input placeholder="请输入服务类型"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>价格</ion-label>
+    <ion-input placeholder="请输入价格"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>描述图片</ion-label>
+    <input #file type="file" multiple="true" accept="image/*" (change)="uploadFile()" />
+    <ion-button (click)="handleFileButton()">点击上传图片</ion-button>
+  </ion-item>
+
+  <ion-list>
+    <section *ngFor="let item of pickerList">
+      <img [src]="item" />
+    </section>
+  </ion-list>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-button expand="full" (click)="handleLogin()">发布服务</ion-button>
+  </ion-toolbar>
+</ion-footer>

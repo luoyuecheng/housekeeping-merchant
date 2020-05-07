@@ -1,0 +1,33 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-item class="header">
+      <ion-text (click)="handleBack()">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+        返回登录
+      </ion-text>
+      <ion-title>注&emsp;册</ion-title>
+    </ion-item>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-label class="tip">手机号码将用于登录商家端和PC管理后台</ion-label>
+
+  <ion-item class="item-no-border">
+    <ion-label>手机号</ion-label>
+    <ion-input placeholder="请输入手机号" [(ngModel)]="phone"></ion-input>
+  </ion-item>
+
+  <ion-item class="mt10">
+    <ion-label>设置密码</ion-label>
+    <ion-input placeholder="请输入密码" type="password" [(ngModel)]="password"></ion-input>
+  </ion-item>
+
+  <ion-item class="item-no-border">
+    <ion-label>确认密码</ion-label>
+    <ion-input placeholder="请再次确认密码" type="password" [(ngModel)]="checkPassword"></ion-input>
+  </ion-item>
+  <ion-label class="pw-tip">密码为8-16位的字母和数字，且必须同时包含字母和数字</ion-label>
+
+  <ion-button expand="full" (click)="handleLogin()" [disabled]="!phone || !password || !checkPassword">登&emsp;录</ion-button>
+</ion-content>

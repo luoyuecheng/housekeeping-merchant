@@ -1,17 +1,38 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Tab 1
-    </ion-title>
+    <ion-item class="header">
+      <!-- <ion-icon name="chevron-back-outline" (click)="handleBack()"></ion-icon> -->
+      <ion-title>欢迎来到58到家</ion-title>
+    </ion-item>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
+<ion-content [fullscreen]="true" *ngIf="isCertification">
   <app-explore-container name="Tab 1 page"></app-explore-container>
+</ion-content>
+
+<ion-content [fullscreen]="true" *ngIf="!isCertification">
+  <ion-img src="https://static.daojia.com/jz/common/common-resource/cdnHtml/baomu/bm-channel/index/res/banner.png?v=201909041915"></ion-img>
+  <ion-item class="title">
+    <ion-label>完成以下2步即可接单赚钱啦</ion-label>
+  </ion-item>
+  <ion-text class="step-title">第一步</ion-text>
+  <ion-item class="step" (click)="goCertification()">
+    <ion-icon name="person-circle-outline"></ion-icon>
+    <ion-label>提交身份认证</ion-label>
+    <ion-text class="right-allow">
+      去认证
+      <ion-icon name="chevron-forward-outline"></ion-icon>
+    </ion-text>
+  </ion-item>
+
+  <ion-text class="step-title">第二步</ion-text>
+  <ion-item class="step">
+    <ion-icon name="reader-outline"></ion-icon>
+    <ion-label>加入直约</ion-label>
+    <ion-text class="right-allow">
+      接平台订单
+      <ion-icon name="chevron-forward-outline"></ion-icon>
+    </ion-text>
+  </ion-item>
 </ion-content>

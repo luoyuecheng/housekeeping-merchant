@@ -1,4 +1,33 @@
-<div id="container">
-  <strong>{{ name }}</strong>
-  <p>Explore <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-</div>
+<ion-list>
+  <ion-item class="step" (click)="handleRoute('/my-service')">
+    <ion-icon name="person-circle-outline"></ion-icon>
+    <ion-label>服务内容</ion-label>
+    <ion-text class="right-allow">
+      <ion-icon name="chevron-forward-outline"></ion-icon>
+    </ion-text>
+  </ion-item>
+
+  <ion-item class="step">
+    <ion-icon name="person-circle-outline"></ion-icon>
+    <ion-label>接单管理</ion-label>
+    <ion-text class="right-allow">
+      <ion-icon name="chevron-forward-outline"></ion-icon>
+    </ion-text>
+  </ion-item>
+
+  <ion-item class="step">
+    <ion-icon name="person-circle-outline"></ion-icon>
+    <ion-label>评价管理</ion-label>
+    <ion-text class="right-allow">
+      <ion-icon name="chevron-forward-outline"></ion-icon>
+    </ion-text>
+  </ion-item>
+
+  <ion-item class="step">
+    <ion-icon name="person-circle-outline"></ion-icon>
+    <ion-label>我的钱包</ion-label>
+    <ion-text class="right-allow">
+      <ion-icon name="chevron-forward-outline"></ion-icon>
+    </ion-text>
+  </ion-item>
+</ion-list>

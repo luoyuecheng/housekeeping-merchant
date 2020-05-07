@@ -1,0 +1,24 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-item class="header">
+      <ion-title>登&emsp;录</ion-title>
+      <ion-text slot="end" >
+        <a routerLink="/register">注册</a>
+      </ion-text>
+    </ion-item>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item class="mt15">
+    <ion-label>手机号</ion-label>
+    <ion-input placeholder="请输入手机号" [(ngModel)]="phone"></ion-input>
+  </ion-item>
+
+  <ion-item class="item-no-border">
+    <ion-label>密&emsp;码</ion-label>
+    <ion-input placeholder="请输入密码" type="password" [(ngModel)]="password"></ion-input>
+  </ion-item>
+
+  <ion-button expand="full" (click)="handleLogin()" [disabled]="!phone || !password">登&emsp;录</ion-button>
+</ion-content>

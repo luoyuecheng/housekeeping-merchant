@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Params } from '@angular/router';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab1',
@@ -6,7 +8,13 @@ import { Component } from '@angular/core';
   styleUrls: ['tab1.page.scss']
 })
 export class Tab1Page {
+  public isCertification = true;
 
-  constructor() {}
+  constructor(
+    private navCtrl: NavController,
+  ) {}
 
+  goCertification() {
+    this.navCtrl.navigateForward('/certification');
+  }
 }
