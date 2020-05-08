@@ -1,0 +1,7 @@
+{
+  "/wx": {
+    "target": "http://192.168.99.161:8086",
+    "secure": false,
+    "changeOrigin": true
+  }
+}

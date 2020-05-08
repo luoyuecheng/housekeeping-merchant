@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-item class="header">
-      <!-- <ion-icon name="chevron-back-outline" (click)="handleBack()"></ion-icon> -->
+      <ion-icon name="chevron-back-outline" (click)="handleBack()"></ion-icon>
       <ion-title>我发布的服务</ion-title>
     </ion-item>
   </ion-toolbar>
@@ -40,9 +40,14 @@
       </ion-item>
     </ion-card>
 
-    <ion-card>
+    <ion-card *ngIf="!goods || !goods.length">
+      <p class="no-goods">您没有发布服务，您可以点击下方"发布服务"按钮前去发布您的服务。</p>
+    </ion-card>
+
+    <ion-card *ngFor="let item of goods">
       <ion-item>
         <ion-label>{{ 'title 服务标题' }}</ion-label>
+        <ion-text (click)="viewService()">查看详情</ion-text>
       </ion-item>
       <ion-item>
         <ion-label>服务类型</ion-label>
@@ -60,34 +65,54 @@
   </ion-list>
 </ion-content>
 
-<ion-content>
+<ion-content *ngIf="!release">
   <ion-item>
-    <ion-label>服务标题</ion-label>
-    <ion-input placeholder="请输入服务标题"></ion-input>
+    <ion-label>服务名称</ion-label>
+    <ion-input [(ngModel)]="serviceForm.name" placeholder="请输入服务名称"></ion-input>
   </ion-item>
   <ion-item>
     <ion-label>服务类型</ion-label>
-    <ion-input placeholder="请输入服务类型"></ion-input>
+    <ion-select [(ngModel)]="serviceForm.firstCategory" (ionChange)="loadCategory()" placeholder="请输入一级服务类型">
+      <ion-select-option *ngFor="let item of firstCategoryList" [value]="item.id">{{ item.name }}</ion-select-option>
+    </ion-select>
   </ion-item>
   <ion-item>
-    <ion-label>价格</ion-label>
-    <ion-input placeholder="请输入价格"></ion-input>
+    <ion-label>服务类型</ion-label>
+    <ion-select [(ngModel)]="serviceForm.categoryId" placeholder="请输入二级服务类型">
+      <ion-select-option *ngFor="let item of secondCategoryList" [value]="item.id">{{ item.name }}</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <!-- <ion-item>
+    <ion-label>服务地址</ion-label>
+    <ion-input [(ngModel)]="serviceForm.address" placeholder="请输入服务类型"></ion-input>
+  </ion-item> -->
+  <ion-item>
+    <ion-label>价格(元)</ion-label>
+    <ion-input [(ngModel)]="serviceForm.retailPrice" placeholder="请输入价格"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>服务头像</ion-label>
+    <ion-avatar *ngIf="serviceForm.picUrl">
+      <img [src]="serviceForm.picUrl" />
+    </ion-avatar>
+    <ion-button (click)="handleFileButton('avatar')">点击上传图片</ion-button>
   </ion-item>
   <ion-item>
     <ion-label>描述图片</ion-label>
-    <input #file type="file" multiple="true" accept="image/*" (change)="uploadFile()" />
     <ion-button (click)="handleFileButton()">点击上传图片</ion-button>
   </ion-item>
 
   <ion-list>
-    <section *ngFor="let item of pickerList">
+    <section *ngFor="let item of serviceForm.pickerList">
       <img [src]="item" />
     </section>
   </ion-list>
 </ion-content>
 
+<input #file class="hidden" type="file" accept="image/*" (change)="uploadFile()" />
+
 <ion-footer>
   <ion-toolbar>
-    <ion-button expand="full" (click)="handleLogin()">发布服务</ion-button>
+    <ion-button expand="full" (click)="onSubmit()">发布服务</ion-button>
   </ion-toolbar>
 </ion-footer>

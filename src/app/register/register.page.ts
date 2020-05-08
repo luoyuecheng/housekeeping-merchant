@@ -44,7 +44,22 @@ export class RegisterPage implements OnInit {
       }
     }
 
-    await this.loginService.alertTip({ subHeader: '注册成功，前往登录' });
-    this.navCtrl.navigateRoot('/login');
+    this.loginService.register({
+      mobile: this.phone,
+      password: this.password,
+      username: this.phone,
+    }).subscribe(async (data: any) => {
+      console.log(data)
+      if (data && data.errno) {
+        await this.loginService.alertTip({
+          header: '注册失败',
+          message: data.errmsg,
+        })
+        return void 0;
+      }
+
+      await this.loginService.alertTip({ subHeader: '注册成功，前往登录' });
+      this.navCtrl.navigateRoot('/login');
+    })
   }
 }

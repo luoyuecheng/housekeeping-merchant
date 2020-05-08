@@ -1,16 +1,41 @@
 import { Injectable } from '@angular/core';
 import { AlertController } from '@ionic/angular';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable, of } from 'rxjs';
+import { catchError, map, tap, retry } from 'rxjs/operators';
+import { loginInterface } from './login.interface';
+
+export interface AuthInfo {
+  gender?: number;
+  nickName: string;
+  mobile: string;
+  avatar: string;
+  token: string;
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
+  public authInfo: AuthInfo;
 
   constructor(
     private alertCtrl: AlertController,
     private http: HttpClient,
-  ) { }
+  ) {
+    this.authInfo = this.getAuthInfo();
+  }
+
+  // 获取用户信息
+  getAuthInfo(): AuthInfo {
+    return JSON.parse(localStorage.getItem('auth'));
+  }
+
+  // 存储用户信息
+  setAuthInfo(authInfo: AuthInfo) {
+    this.authInfo = authInfo;
+    localStorage.setItem('auth', JSON.stringify(authInfo));
+  }
 
   async alertTip(option: { header?: string, message?: string, subHeader?: string, [key: string]: any }) {
     let param = {
@@ -18,7 +43,7 @@ export class LoginService {
       ...option,
     }
     let alert: HTMLIonAlertElement = await this.alertCtrl.create(param);
-    await alert.present();
+    return await alert.present();
   }
 
   async verification(option: { type?: string, value: string, tip: string, reg?: RegExp }) {
@@ -40,6 +65,10 @@ export class LoginService {
       case 'password':
         reg = /^[a-zA-Z\d]{8,16}$/;
         break;
+      case 'required':
+        option.value = option.value.toString().trim();
+        reg = /^.+?$/;
+        break;
       default:
         reg = option.reg;
     }
@@ -55,5 +84,43 @@ export class LoginService {
       return false;
     }
     return true;
+  }
+
+  // 登录
+  login(data) {
+    return this.http.post(loginInterface.loginApi, { ...data }).pipe(
+      tap(_ => console.log(`登录, 请求接口: ${loginInterface.loginApi}`))
+    )
+  }
+
+  // 注册
+  register(data) {
+    return this.http.post(loginInterface.register, { ...data }).pipe(
+      tap(_ => console.log(`注册, 请求接口: ${loginInterface.register}`))
+    )
+  }
+
+  // 普通 GET 接口
+  getRequest(url: string, data?: any) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: this.authInfo.token,
+      }),
+      params: {
+        ...data,
+      }
+    }
+    return this.http.get(url, httpOptions);
+  }
+
+  // 普通的 POST 接口
+  postRequest(url: string, data?: any) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: this.authInfo.token,
+      }),
+    }
+
+    return this.http.post(url, { ...data }, httpOptions);
   }
 }

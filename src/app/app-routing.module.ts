@@ -18,13 +18,18 @@ const routes: Routes = [
     path: '',
     redirectTo: 'login',
     pathMatch: 'full'
-  },  {
+  },
+  {
     path: 'register',
     loadChildren: () => import('./register/register.module').then( m => m.RegisterPageModule)
   },
   {
     path: 'my-service',
     loadChildren: () => import('./my-service/my-service.module').then( m => m.MyServicePageModule)
+  },
+  {
+    path: 'view-service',
+    loadChildren: () => import('./view-service/view-service.module').then( m => m.ViewServicePageModule)
   }
 
 ];
