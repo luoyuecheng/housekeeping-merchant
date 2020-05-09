@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { LoginService } from '../services/login.service';
+import { loginInterface } from '../services/login.interface';
 
 @Component({
   selector: 'app-login',
@@ -54,11 +55,23 @@ export class LoginPage implements OnInit {
 
       const { userInfo = {}, token = '' } = data.data || {};
 
-      this.loginService.setAuthInfo({
+      const authInfo = {
         nickName: userInfo.nickName,
         avatar: userInfo.avatarUrl,
         mobile: userInfo.nickName,
         token: token,
+        authentication: false,
+      };
+
+      this.loginService.setAuthInfo(authInfo);
+
+      await this.loginService.postRequest(loginInterface.getAuthentication, {}).subscribe((data: any) => {
+        if (!data || data.errno) {
+          return void 0;
+        }
+
+        authInfo.authentication = true;
+        this.loginService.setAuthInfo(authInfo);
       })
 
       this.navCtrl.navigateRoot('/tabs');

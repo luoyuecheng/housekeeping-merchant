@@ -64,5 +64,7 @@ export class DirectPage implements OnInit {
   }
 
   // 点击二级类型，查看订单
-  handleCategory(category: Category) {}
+  handleCategory(category: Category) {
+
+  }
 }

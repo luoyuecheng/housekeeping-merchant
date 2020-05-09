@@ -1,0 +1,13 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-item class="header">
+      <ion-icon name="chevron-back-outline" (click)="handleBack()"></ion-icon>
+      <ion-title>{{ title || '全部' }}</ion-title>
+    </ion-item>
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-buttons slot="start" *ngFor="let nav of navs">
+      <ion-button [class.active]="key === nav.key" (click)="handleNav(nav)">{{ nav.title }}</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>

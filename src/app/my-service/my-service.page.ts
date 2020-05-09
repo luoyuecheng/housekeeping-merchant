@@ -1,5 +1,6 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { ActivatedRoute, Params } from '@angular/router';
 import { AlertController, NavController } from '@ionic/angular';
 
 import { LoginService } from '../services/login.service';
@@ -21,7 +22,7 @@ export class MyServicePage implements OnInit {
   // 二级类目
   secondCategoryList = [];
   // 商品列表(我发布的服务列表)
-  goods = [];
+  goods = [{}];
   // 上传图片类型: avatar - 上传头像
   uploadType: string;
 
@@ -101,6 +102,10 @@ export class MyServicePage implements OnInit {
 
     // 商品编号必填，用商品名称填充
     data['goodsSn'] = this.serviceForm.name;
+    // 商品类目名，用 keywords 代替
+    for (let item of this.secondCategoryList) {
+      data['keywords'] = item.name;
+    }
 
     // 构建详情描述图片
     data['detail'] = '';
@@ -163,8 +168,12 @@ export class MyServicePage implements OnInit {
   }
 
   // 查看服务详情
-  viewService() {
-    this.navCtrl.navigateForward('/view-service');
+  viewService(goods) {
+    const queryParams: Params = {
+      id: goods.id,
+    }
+
+    this.navCtrl.navigateForward('/view-service', { queryParams });
   }
 
   async handleOrder(operate: string) {

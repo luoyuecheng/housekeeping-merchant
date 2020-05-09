@@ -1,9 +1,18 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>view-service</ion-title>
+    <ion-item class="header">
+      <ion-icon name="chevron-back-outline" (click)="handleBack()"></ion-icon>
+      <ion-title>{{ goods?.name }}</ion-title>
+    </ion-item>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <ion-grid>
+    <ion-row>
+      <ion-col>服务类型: {{ goods?.keywords }}</ion-col>
+      <ion-col>价格: {{ goods?.retailPrice }}元</ion-col>
+    </ion-row>
+  </ion-grid>
+  <pre #content></pre>
 </ion-content>

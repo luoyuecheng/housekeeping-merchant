@@ -1,0 +1,117 @@
+<ion-content>
+  <ion-card class="user-info">
+    <ion-card-header>
+      <ion-item>
+        <ion-avatar slot="start">
+          <img src="{{ userInfo.avatar }}">
+        </ion-avatar>
+        <ion-label>
+          <ion-label>
+            <ion-text>{{ userInfo.nickName }}</ion-text>
+          </ion-label>
+          <ion-label class="message">
+            <ion-text>{{ userInfo.nickName }}</ion-text>
+          </ion-label>
+        </ion-label>
+      </ion-item>
+
+      <!--信息总览 -->
+      <!-- <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-text>0</ion-text>
+            <ion-text>卡券</ion-text>
+          </ion-col>
+
+          <ion-col>
+            <ion-text>0</ion-text>
+            <ion-text>收藏服务</ion-text>
+          </ion-col>
+
+          <ion-col>
+            <ion-text>0</ion-text>
+            <ion-text>收藏店铺</ion-text>
+          </ion-col>
+
+          <ion-col>
+            <ion-text>0</ion-text>
+            <ion-text>足迹</ion-text>
+          </ion-col>
+        </ion-row>
+      </ion-grid> -->
+    </ion-card-header>
+  </ion-card>
+
+  <!-- <ion-card class="orders">
+    <ion-item (click)="handleItem(0)">
+      <ion-label>我的订单</ion-label>
+      <ion-text class="right-allow">查看全部<ion-icon name="chevron-forward-outline"></ion-icon></ion-text>
+    </ion-item>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col (click)="handleItem(1)">
+          <ion-text><ion-icon name="time-outline"></ion-icon></ion-text>
+          <ion-text>待确认</ion-text>
+        </ion-col>
+
+        <ion-col (click)="handleItem(2)">
+          <ion-text><ion-icon name="card-outline"></ion-icon></ion-text>
+          <ion-text>待服务</ion-text>
+        </ion-col>
+
+        <ion-col (click)="handleItem(3)">
+          <ion-text><ion-icon name="card-outline"></ion-icon></ion-text>
+          <ion-text>待支付</ion-text>
+        </ion-col>
+
+        <ion-col (click)="handleItem(4)">
+          <ion-text><ion-icon name="ellipsis-horizontal-circle-outline"></ion-icon></ion-text>
+          <ion-text>待评价</ion-text>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card> -->
+
+  <ion-card class="features">
+    <ion-item (click)="handleItem('certification')">
+      <ion-label>我的认证</ion-label>
+      <ion-text class="right-allow"><ion-icon name="chevron-forward-outline"></ion-icon></ion-text>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>违规与申诉</ion-label>
+      <ion-text class="right-allow"><ion-icon name="chevron-forward-outline"></ion-icon></ion-text>
+    </ion-item>
+  </ion-card>
+
+  <ion-card class="features">
+    <ion-item>
+      <ion-label>设置</ion-label>
+      <ion-text class="right-allow"><ion-icon name="chevron-forward-outline"></ion-icon></ion-text>
+    </ion-item>
+
+  </ion-card>
+
+  <!-- <ion-card class="features">
+    <ion-item>
+      <ion-label>我的地址</ion-label>
+      <ion-text class="right-allow"><ion-icon name="chevron-forward-outline"></ion-icon></ion-text>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>我的店铺</ion-label>
+      <ion-text class="right-allow"><ion-icon name="chevron-forward-outline"></ion-icon></ion-text>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>入驻发布</ion-label>
+      <ion-text class="right-allow"><ion-icon name="chevron-forward-outline"></ion-icon></ion-text>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>帮助中心</ion-label>
+      <ion-text class="right-allow"><ion-icon name="chevron-forward-outline"></ion-icon></ion-text>
+    </ion-item>
+  </ion-card> -->
+</ion-content>

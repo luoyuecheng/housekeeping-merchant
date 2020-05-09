@@ -24,6 +24,10 @@ const routes: Routes = [
         loadChildren: () => import('../direct/direct.module').then(m => m.DirectPageModule)
       },
       {
+        path: 'about-me',
+        loadChildren: () => import('../about-me/about-me.module').then( m => m.AboutMePageModule)
+      },
+      {
         path: '',
         redirectTo: '/tabs/tab1',
         pathMatch: 'full'

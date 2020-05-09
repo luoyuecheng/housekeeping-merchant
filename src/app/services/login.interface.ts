@@ -1,4 +1,6 @@
-export const host = 'http://192.168.99.161:8080';
+// export const host = 'http://192.168.99.161:8080';
+// export const host = 'http://8f6042df.ngrok.io';
+export const host = 'http://47.90.188.234:8080';
 
 export const loginInterface = {
   addGoodsApi: '/wx/goods/add',
@@ -8,4 +10,8 @@ export const loginInterface = {
   getsecondcategory: '/wx/catalog/getsecondcategory', // 查询二级类目
   uploadApi: '/wx/storage/upload', // 图片上传
   queryGoodsApi: '/wx/goods/user/show', // 查询所有商品/服务
+  getGoodsDetailApi: '/wx/goods/detail', // 获取商品祥情
+  getGoodsByParam: '/wx/goods/list', // 条件获取商品
+  postAuthentication: '/wx/auth/authentication', // 认证信息
+  getAuthentication: '/wx/auth/get/authentication', // 获取认证信息 POST
 }

@@ -1,0 +1,23 @@
+.certification {
+  .title {
+    justify-content: center;
+    --background: transparent;
+
+    ion-label {
+      text-align: center;
+      font-weight: bold;
+    }
+  }
+
+  .step-title {
+    margin-left: 5px;
+  }
+
+  .step {
+    margin: 10px 5px;
+
+    ion-icon {
+      color: rgb(237, 88, 7);
+    }
+  }
+}

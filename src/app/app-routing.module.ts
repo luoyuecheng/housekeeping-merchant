@@ -30,7 +30,15 @@ const routes: Routes = [
   {
     path: 'view-service',
     loadChildren: () => import('./view-service/view-service.module').then( m => m.ViewServicePageModule)
+  },
+  {
+    path: 'orders',
+    loadChildren: () => import('./orders/orders.module').then( m => m.OrdersPageModule)
+  },  {
+    path: 'modal',
+    loadChildren: () => import('./modal/modal.module').then( m => m.ModalPageModule)
   }
+
 
 ];
 @NgModule({
