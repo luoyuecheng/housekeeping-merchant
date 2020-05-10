@@ -1,10 +1,11 @@
 // export const host = 'http://192.168.99.161:8080';
-// export const host = 'http://8f6042df.ngrok.io';
+// export const host = 'http://97cf53d1.ngrok.io';
 export const host = 'http://47.90.188.234:8080';
 
 export const loginInterface = {
   addGoodsApi: '/wx/goods/add',
   loginApi: '/wx/auth/login', // 登录接口
+  logoutApi: '/wx/auth/logout', // 退出登录
   register: '/wx/auth/register', // 注册
   getfirstcategory: '/wx/catalog/getfirstcategory', // 查询一级类目
   getsecondcategory: '/wx/catalog/getsecondcategory', // 查询二级类目
@@ -14,4 +15,6 @@ export const loginInterface = {
   getGoodsByParam: '/wx/goods/list', // 条件获取商品
   postAuthentication: '/wx/auth/authentication', // 认证信息
   getAuthentication: '/wx/auth/get/authentication', // 获取认证信息 POST
+  refuseApi: '', // 拒单接口,
+  receiveApi: '', // 接单接口
 }

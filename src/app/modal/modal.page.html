@@ -7,7 +7,8 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="certification" [fullscreen]="true" *ngIf="!isCertification">
+<!-- 未认证 -->
+<ion-content class="certification" [fullscreen]="true" *ngIf="activeType?.key === 'certification'">
   <ion-img src="https://static.daojia.com/jz/common/common-resource/cdnHtml/baomu/bm-channel/index/res/banner.png?v=201909041915"></ion-img>
   <ion-item class="title">
     <ion-label>完成以下2步即可接单赚钱啦</ion-label>
@@ -32,3 +33,18 @@
     </ion-text>
   </ion-item>
 </ion-content>
+
+<ion-content *ngIf="activeType?.key === message">
+  <ion-card *ngFor="let item of messages">
+    <ion-item>
+      <ion-label>{{ item?.name }}</ion-label>
+    </ion-item>
+  </ion-card>
+</ion-content>
+
+<!-- 设置 -->
+<ion-footer *ngIf="activeType?.key === 'setting'">
+  <ion-toolbar>
+    <ion-button expand="full" (click)="signOut()">退出登录</ion-button>
+  </ion-toolbar>
+</ion-footer>

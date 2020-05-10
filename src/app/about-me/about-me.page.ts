@@ -43,6 +43,9 @@ export class AboutMePage {
         }
         this.navCtrl.navigateForward('/modal', { queryParams: { key } });
         break;
+      case 'setting':
+        this.navCtrl.navigateForward('/modal', { queryParams: { key } });
+        break;
       default:
         this.navCtrl.navigateForward('/modal');
     }

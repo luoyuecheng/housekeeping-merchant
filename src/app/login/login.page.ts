@@ -3,6 +3,8 @@ import { NavController } from '@ionic/angular';
 import { LoginService } from '../services/login.service';
 import { loginInterface } from '../services/login.interface';
 
+import { tap } from 'rxjs/operators';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -65,16 +67,21 @@ export class LoginPage implements OnInit {
 
       this.loginService.setAuthInfo(authInfo);
 
-      await this.loginService.postRequest(loginInterface.getAuthentication, {}).subscribe((data: any) => {
+      await this.loginService.postRequest(loginInterface.getAuthentication, {}).pipe(
+        tap(_ => _, error => {
+          console.log('error', '错误');
+          // 获取权限信息失败时，直接跳转
+          this.navCtrl.navigateRoot('/tabs');
+        })
+      ).subscribe((data: any) => {
         if (!data || data.errno) {
           return void 0;
         }
 
         authInfo.authentication = true;
         this.loginService.setAuthInfo(authInfo);
+        this.navCtrl.navigateRoot('/tabs');
       })
-
-      this.navCtrl.navigateRoot('/tabs');
     })
   }
 }

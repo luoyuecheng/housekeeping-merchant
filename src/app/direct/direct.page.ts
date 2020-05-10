@@ -3,6 +3,7 @@ import { AlertController, NavController } from '@ionic/angular';
 
 import { LoginService } from '../services/login.service';
 import { loginInterface } from '../services/login.interface';
+import { Params } from '@angular/router';
 
 export interface Category {
   id: string | number;
@@ -25,6 +26,7 @@ export class DirectPage implements OnInit {
 
   constructor(
     private loginService: LoginService,
+    private navCtrl: NavController,
   ) { }
 
   ngOnInit() {
@@ -65,6 +67,9 @@ export class DirectPage implements OnInit {
 
   // 点击二级类型，查看订单
   handleCategory(category: Category) {
-
+    const queryParams: Params = {
+      ...category
+    }
+    this.navCtrl.navigateForward('/orders', { queryParams });
   }
 }

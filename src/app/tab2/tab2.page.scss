@@ -1,0 +1,13 @@
+ion-item {
+  --inner-border-width: 0;
+}
+
+ion-list {
+  --ion-background-color: rgba(0, 0, 0, 0);
+
+  ion-item {
+    --padding-left: 0;
+    margin-bottom: 3px;
+    --background: #fff;
+  }
+}

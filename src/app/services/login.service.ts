@@ -38,6 +38,12 @@ export class LoginService {
     localStorage.setItem('auth', JSON.stringify(authInfo));
   }
 
+  // 退出登录，清除用户信息
+  removeAntuInfo() {
+    this.authInfo = undefined;
+    localStorage.removeItem('auth');
+  }
+
   async alertTip(option: { header?: string, message?: string, subHeader?: string, [key: string]: any }) {
     let param = {
       buttons: ['确认'],
