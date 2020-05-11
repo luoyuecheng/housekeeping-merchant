@@ -58,17 +58,28 @@ export class CertificationPage implements OnInit {
 
   // 获取认证信息
   getAuthentication() {
-    this.loginService.postRequest(loginInterface.getAuthentication, { id: 3 }).subscribe((data: any) => {
+    this.loginService.postRequest(loginInterface.getAuthentication).subscribe((data: any) => {
       if (!data || data.errno) {
         return void 0;
       }
 
-      const authentication = data;
+      if (Array.isArray(data) && !data.length) {
+        return void 0;
+      }
+
+      const authentication = data[0];
       // 身份证照片链接，转化为 list
       if (data.imgUrl) {
-        authentication.imgUrl = data.imgUrl.split(',');
+        authentication.imgUrl = authentication.imgUrl.split(',');
       }
-      this.authentication = data;
+
+      // 设置用户信息为已认证
+      const authInfo: AuthInfo = this.loginService.getAuthInfo();
+      if (authInfo) {
+        this.loginService.setAuthInfo({ ...authInfo, authentication: true });
+      }
+
+      this.authentication = authentication;
     })
   }
 
@@ -115,11 +126,6 @@ export class CertificationPage implements OnInit {
 
       // 认证完成后，获取认证信息
       this.getAuthentication();
-      // 设置用户信息为已认证
-      const authInfo: AuthInfo = this.loginService.getAuthInfo();
-      if (authInfo) {
-        this.loginService.setAuthInfo({ ...authInfo, authentication: true });
-      }
 
       await this.loginService.alertTip({
         header: '认证成功',

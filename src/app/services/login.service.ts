@@ -14,6 +14,20 @@ export interface AuthInfo {
   authentication: boolean; // 是否认证, 默认为 false
 }
 
+// 订单状态: 枚举
+export enum OrderStatus {
+  all = 0, // 全部订单
+  unpaid = 101, // 未接单(新订单)
+  unpaidUserCancel = 102, // 订单未支付，用户取消 (无)
+  unpaidSysCancen = 103, // 订单未支付，超期系统取消 (无)
+  unserved = 201, // 待服务
+  userRefund = 202, // 用户申请退款 (商家未接单，申请退款/取消订单)
+  adminRefund = 203, // 管理员执行退款，确认退款成功 (商家确认退款 / 商家拒单 / 超时未接单自动退单)
+  serving = 301, // 服务中
+  userCompleted = 401, // 用户确认服务完成
+  adminCompleted = 402, // 用户未确认，自动完成
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -130,5 +144,10 @@ export class LoginService {
     }
 
     return this.http.post(url, { ...data }, httpOptions);
+  }
+
+  // PUT 接口
+  putRequest(url: string, data?: any) {
+    return this.http.put(url, { ...data });
   }
 }

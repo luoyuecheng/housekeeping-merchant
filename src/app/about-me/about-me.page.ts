@@ -28,13 +28,6 @@ export class AboutMePage {
     }
 
     switch (key) {
-      case 0:
-      case 1:
-      case 2:
-      case 3:
-      case 4:
-        this.navCtrl.navigateForward('/tabs/aboutMe/order', { queryParams });
-        break;
       case 'certification':
         // 已认证时，查看认证信息
         if (this.userInfo && this.userInfo.authentication) {
@@ -47,7 +40,10 @@ export class AboutMePage {
         this.navCtrl.navigateForward('/modal', { queryParams: { key } });
         break;
       default:
-        this.navCtrl.navigateForward('/modal');
+        this.loginService.alertTip({
+          header: '报歉',
+          message: '该功能暂未上架，程序员正在加班中...',
+        })
     }
   }
 }

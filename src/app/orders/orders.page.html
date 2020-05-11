@@ -11,19 +11,20 @@
   <ion-card *ngFor="let item of orders">
     <ion-item>
       <ion-icon name="person-circle-outline"></ion-icon>
-      <ion-label>姓名: {{ item?.name }}</ion-label>
+      <ion-label (click)="handleService(item)">{{ item.goodsList[0].goodsName }}</ion-label>
       <ion-text>等待接单</ion-text>
     </ion-item>
     <ion-item>
       <ion-label>
-        <ion-text>{{ item?.detail }}</ion-text>
-        <p>{{ item?.detail || item?.brief }}</p>
+        <ion-text>{{ item.goodsList[0].goodsName }}</ion-text>
+        <!-- <p>{{ item?.detail || item?.brief }}</p> -->
       </ion-label>
       <ion-text>直约抢单</ion-text>
     </ion-item>
     <ion-text class="message">
       <ion-icon name="time-outline"></ion-icon>
-      <ion-text>{{ item?.detail }}</ion-text>
+      <ion-label>{{ item?.shipSn }}</ion-label>
+      <ion-text>服务时长: {{ item?.shipChannel }} 小时</ion-text>
     </ion-text>
     <ion-text class="message">
       <ion-icon name="location-outline"></ion-icon>
@@ -31,11 +32,11 @@
     </ion-text>
     <ion-text class="message amount">
       <ion-text class="bd1">直约预付金</ion-text>
-      <ion-label>已付金额: <ion-text>{{ item?.retailPrice }}</ion-text>元</ion-label>
+      <ion-label>已付金额: <ion-text>{{ item.goodsList[0].price }}</ion-text>元</ion-label>
     </ion-text>
     <ion-item>
-      <ion-button class="refuse" slot="end" (click)="handleOrder('refuse')">拒单</ion-button>
-      <ion-button class="receive" slot="end" (click)="handleOrder('receive')">立即接单</ion-button>
+      <ion-button class="refuse" slot="end" (click)="handleOrder(item, orderStatus.adminRefund)">拒单</ion-button>
+      <ion-button class="receive" slot="end" (click)="handleOrder(item, orderStatus.unserved)">立即接单</ion-button>
     </ion-item>
   </ion-card>
 </ion-content>

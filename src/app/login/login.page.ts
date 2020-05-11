@@ -78,6 +78,11 @@ export class LoginPage implements OnInit {
           return void 0;
         }
 
+        if (Array.isArray(data) && !data.length) {
+          this.navCtrl.navigateRoot('/tabs');
+          return void 0;
+        }
+
         authInfo.authentication = true;
         this.loginService.setAuthInfo(authInfo);
         this.navCtrl.navigateRoot('/tabs');

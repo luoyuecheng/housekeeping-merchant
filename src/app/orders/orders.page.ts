@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { Params, ActivatedRoute } from '@angular/router';
-import { LoginService } from '../services/login.service';
+import { LoginService, OrderStatus } from '../services/login.service';
 import { loginInterface } from '../services/login.interface';
 
 @Component({
@@ -12,6 +12,8 @@ import { loginInterface } from '../services/login.interface';
 export class OrdersPage implements OnInit {
   public category;
   public orders;
+
+  orderStatus = OrderStatus;
 
   constructor(
     private loginService: LoginService,
@@ -29,7 +31,7 @@ export class OrdersPage implements OnInit {
 
   // 搜索订单
   searchOrders() {
-    this.loginService.getRequest(loginInterface.getGoodsByParam, { categoryId: this.category.id }).
+    this.loginService.getRequest(loginInterface.queryOrder, { orderStatus: this.orderStatus.unpaid }).
       subscribe((data: any) => {
         if (!data || data.errno) {
           return void 0;
@@ -46,22 +48,19 @@ export class OrdersPage implements OnInit {
   }
 
   // 接单 / 拒单
-  handleOrder(type: string) {
-    switch (type) {
-      // 拒单
-      case 'refuse':
-        this.loginService.postRequest(loginInterface.refuseApi, {}).subscribe((data: any) => {
-          // 拒单后，重新检索订单
-          this.searchOrders();
-        })
-        break;
-      // 接单
-      case 'receive':
-        this.loginService.postRequest(loginInterface.receiveApi, {}).subscribe((data: any) => {
-          this.navCtrl.navigateRoot('/tabs/tab3');
-        })
-        break;
-      default:
-    }
+  handleOrder(order, status: OrderStatus) {
+    const url = `${loginInterface.updateOrderStatus}?orderStatus=${status}&id=${order.id}`;
+
+    this.loginService.putRequest(url).subscribe((data: any) => {
+      if (!data || data.errno) {
+        return void 0;
+      }
+
+      if (status === this.orderStatus.unserved) {
+        this.navCtrl.navigateRoot('/tabs/tab3');
+      }
+
+      this.searchOrders();
+    })
   }
 }
