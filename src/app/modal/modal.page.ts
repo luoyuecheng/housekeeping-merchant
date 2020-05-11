@@ -27,6 +27,9 @@ export class ModalPage implements OnInit {
     }
   }
 
+  // 消息列表
+  messages;
+
   constructor(
     private navCtrl: NavController,
     private route: ActivatedRoute,
@@ -41,6 +44,20 @@ export class ModalPage implements OnInit {
         activeType.title = param.title;
       }
       this.activeType = activeType;
+
+      if (activeType.key === 'message') {
+        this.getNotice();
+      }
+    })
+  }
+
+  // 获取通知
+  getNotice() {
+    this.loginService.getRequest(loginInterface.getNotice).subscribe((data:any) => {
+      if (!data) {
+        return void 0;
+      }
+      this.messages = data;
     })
   }
 

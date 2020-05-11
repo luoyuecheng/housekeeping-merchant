@@ -34,11 +34,13 @@
   </ion-item>
 </ion-content>
 
-<ion-content *ngIf="activeType?.key === message">
+<ion-content *ngIf="activeType?.key === 'message'">
   <ion-card *ngFor="let item of messages">
     <ion-item>
-      <ion-label>{{ item?.name }}</ion-label>
+      <ion-label>{{ item?.title }}</ion-label>
+      <ion-text>{{ item?.updateTime }}</ion-text>
     </ion-item>
+    <pre [innerHTML]="item?.content"></pre>
   </ion-card>
 </ion-content>
 

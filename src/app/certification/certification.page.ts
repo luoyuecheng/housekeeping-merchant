@@ -69,14 +69,21 @@ export class CertificationPage implements OnInit {
 
       const authentication = data[0];
       // 身份证照片链接，转化为 list
-      if (data.imgUrl) {
+      if (authentication.imgUrl) {
         authentication.imgUrl = authentication.imgUrl.split(',');
       }
+      console.log('authentication', authentication)
 
       // 设置用户信息为已认证
       const authInfo: AuthInfo = this.loginService.getAuthInfo();
       if (authInfo) {
-        this.loginService.setAuthInfo({ ...authInfo, authentication: true });
+        // 是否认证成功
+        authInfo.checkSuccess = authentication.checkSuccess;
+        authInfo.idCard = authentication.idCard;
+        authInfo.imgUrl = authentication.imgUrl;
+        authInfo.name = authentication.name;
+
+        this.loginService.setAuthInfo(authInfo);
       }
 
       this.authentication = authentication;

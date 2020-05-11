@@ -39,4 +39,7 @@
       <ion-button class="receive" slot="end" (click)="handleOrder(item, orderStatus.unserved)">立即接单</ion-button>
     </ion-item>
   </ion-card>
+  <ion-card *ngIf="!orders || !orders.length">
+    <p class="no-goods">当前没有订单</p>
+  </ion-card>
 </ion-content>

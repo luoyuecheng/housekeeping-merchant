@@ -1,6 +1,6 @@
-export const host = 'http://192.168.99.161:8080';
+// export const host = 'http://192.168.99.161:8080';
 // export const host = 'http://97cf53d1.ngrok.io';
-// export const host = 'http://47.90.188.234:8080';
+export const host = 'http://47.90.188.234:8080';
 
 export const loginInterface = {
   addGoodsApi: '/wx/goods/add',
@@ -28,4 +28,6 @@ export const loginInterface = {
   getOrderDetail: '/wx/order/detail', // 查询订单详情
   submitOrder: '/wx/order/submit', // 提交订单
   updateOrderStatus: '/wx/order/updateStatus', // 更新订单状态
+  // 通知
+  getNotice: '/wx/auth/get/notice', // 获取通知
 }

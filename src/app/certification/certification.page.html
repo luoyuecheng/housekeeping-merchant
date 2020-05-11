@@ -25,7 +25,10 @@
 
 <ion-content *ngIf="type === 'authentication'">
   <ion-label class="tip">提示：服务售卖前必须完成身份认证</ion-label>
-  <ion-label class="certification-title">个人认证</ion-label>
+  <ion-label class="certification-title">
+    个人认证
+    <ion-text *ngIf="!authentication?.checkSuccess">- 认证中(需要管理员验证通过认证信息)</ion-text>
+  </ion-label>
   <ion-grid>
     <ion-row>
       <ion-col>

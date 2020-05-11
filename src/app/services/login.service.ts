@@ -12,6 +12,11 @@ export interface AuthInfo {
   avatar: string;
   token: string;
   authentication: boolean; // 是否认证, 默认为 false
+  checkSuccess?: boolean; // 是否认证成功
+  name?: string;
+  idCard?: string;
+  imgUrl?: string;
+  [key: string]: any;
 }
 
 // 订单状态: 枚举
@@ -111,7 +116,11 @@ export class LoginService {
   // 登录
   login(data) {
     return this.http.post(loginInterface.loginApi, { ...data }).pipe(
-      tap(_ => console.log(`登录, 请求接口: ${loginInterface.loginApi}`))
+      tap(_ => {
+        console.log('adfa', _)
+        // this.alertTip()
+        console.log(`登录, 请求接口: ${loginInterface.loginApi}`);
+      })
     )
   }
 
@@ -132,7 +141,24 @@ export class LoginService {
         ...data,
       }
     }
-    return this.http.get(url, httpOptions);
+    return this.http.get(url, httpOptions).pipe(
+      tap((_: any) => {
+        if (!_) {
+          this.alertTip({
+            header: '请求失败',
+            message: '接口调用出错',
+          })
+          return void 0;
+        }
+        if (_.errno) {
+          this.alertTip({
+            header: '请求失败',
+            message: _.errmsg,
+          })
+          return void 0;
+        }
+      })
+    );
   }
 
   // 普通的 POST 接口
@@ -143,11 +169,45 @@ export class LoginService {
       }),
     }
 
-    return this.http.post(url, { ...data }, httpOptions);
+    return this.http.post(url, { ...data }, httpOptions).pipe(
+      tap((_: any) => {
+        if (!_) {
+          this.alertTip({
+            header: '请求失败',
+            message: '接口调用出错',
+          })
+          return void 0;
+        }
+        if (_.errno) {
+          this.alertTip({
+            header: '请求失败',
+            message: _.errmsg,
+          })
+          return void 0;
+        }
+      })
+    );
   }
 
   // PUT 接口
   putRequest(url: string, data?: any) {
-    return this.http.put(url, { ...data });
+    return this.http.put(url, { ...data }).pipe(
+      tap((_: any) => {
+        if (!_) {
+          this.alertTip({
+            header: '请求失败',
+            message: '接口调用出错',
+          })
+          return void 0;
+        }
+        if (_.errno) {
+          this.alertTip({
+            header: '请求失败',
+            message: _.errmsg,
+          })
+          return void 0;
+        }
+      })
+    );
   }
 }
