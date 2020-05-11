@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http'
 import { NavController, AlertController } from '@ionic/angular';
 
 import { LoginService, AuthInfo } from '../services/login.service';
-import { loginInterface } from '../services/login.interface';
+import { loginInterface, imgHost } from '../services/login.interface';
 
 @Component({
   selector: 'app-certification',
@@ -170,7 +170,7 @@ export class CertificationPage implements OnInit {
 
       const { data: fileMap = {} } = data;
 
-      this.imgUrl.push(fileMap.url);
+      this.imgUrl.push(`${imgHost}${fileMap.url}`);
     });
   }
 }

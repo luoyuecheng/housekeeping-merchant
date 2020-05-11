@@ -4,7 +4,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { AlertController, NavController } from '@ionic/angular';
 
 import { LoginService } from '../services/login.service';
-import { loginInterface } from '../services/login.interface';
+import { loginInterface, imgHost } from '../services/login.interface';
 
 @Component({
   selector: 'app-my-service',
@@ -238,10 +238,10 @@ export class MyServicePage implements OnInit {
 
       switch (this.uploadType) {
         case 'avatar':
-          this.serviceForm.picUrl = fileMap.url;
+          this.serviceForm.picUrl = `${imgHost}${fileMap.url}`;
           break;
         default:
-          this.serviceForm.pickerList.push(fileMap.url);
+          this.serviceForm.pickerList.push(`${imgHost}${fileMap.url}`);
       }
 
     });

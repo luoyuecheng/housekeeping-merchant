@@ -1,6 +1,7 @@
 // export const host = 'http://192.168.99.161:8080';
 // export const host = 'http://97cf53d1.ngrok.io';
 export const host = 'http://47.90.188.234:8080';
+export const imgHost = 'http://47.90.188.234';
 
 export const loginInterface = {
   addGoodsApi: '/wx/goods/add',
